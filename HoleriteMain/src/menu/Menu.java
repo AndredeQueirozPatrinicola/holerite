@@ -1,22 +1,22 @@
 package menu;
 
 import java.util.Scanner;
-import holerites.Holerites;
+import holerite.Holerite;
 
 public class Menu 
 {
     
     public static void menu()
     {
-        System.out.println("#############################################");
-        System.out.println("#######    CALCULADORA DE HOLERITE    #######");
-        System.out.println("#############################################\n");
+        System.out.println("---------------------------------------------");
+        System.out.println("|         CALCULADORA DE HOLERITE           |");
+        System.out.println("---------------------------------------------\n");
         
         System.out.println(" ___________________________________________");
         System.out.println("|                                           |");
         System.out.println("| Escolha uma das opções para continuar:    |");
         System.out.println("|                                           |");
-        System.out.println("| 1 - Calcular Holerite                     |");
+        System.out.println("| 1 - Cadastrar Holerite                    |");
         System.out.println("| 2 - Selecionar funcionário                |");
         System.out.println("| 3 - Listar todos holerites                |");
         System.out.println("| 4 - Sair                                  |");
@@ -40,19 +40,21 @@ public class Menu
         switch(opcao)
         {
             case 1:
-                Holerites.holerite();
+                Holerite.cadastraHolerite();
+                menu();
                 break;
                 
             case 2:
-                Holerites.pegaFuncionarios();
+                Holerite.pegaFuncionarios();
                 break;
                 
             case 3:
-                Holerites.listaTodos();
+                Holerite.listaTodos();
                 break;
             
             case 4:
-//                quit();
+                System.out.println("Até logo!");
+                System.exit(0);
                 break;
                 
             default:

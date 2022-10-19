@@ -2,6 +2,7 @@
 package holeritemain;
 
 import menu.Menu;
+import funcionario.Funcionario;
 
 public class HoleriteMain 
 {
@@ -15,8 +16,7 @@ public class HoleriteMain
         catch(Exception e)
         {
             System.out.println("\n!! Opção inválida, selecione uma das opções listadas !!\n");
-            Menu.menu();
+            main(null);
         }
     }
-    
 }
