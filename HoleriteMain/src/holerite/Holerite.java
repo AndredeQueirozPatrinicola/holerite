@@ -6,8 +6,15 @@ import java.util.Scanner;
 
 public class Holerite 
 {
+    
+    public String[] holerites;
+    
+    public Holerite(String[] holerites)
+    {
+        this.holerites = holerites;
+    }
 
-    public static Funcionario cadastraHolerite()
+    public  String[] cadastraHolerite()
     {
         System.out.println("\n---------------------------------------------");
         System.out.println("|     Digite as informações do holerite     |");
@@ -15,7 +22,7 @@ public class Holerite
         System.out.println("---------------------------------------------\n");
         
         Funcionario funcionario;
-        Funcionario buffer = new Funcionario("padrao", 0.00, 0.00, 0.00);
+        String[] buffer = new String[0];
         
         try
         {
@@ -37,15 +44,36 @@ public class Holerite
             
             if(nomeFuncionario.equals("0") && salario == 0 && horaExtra == 0 && adicional == 0)
             {
-                Menu.menu();
+                Holerite holerite = new Holerite(new String[10]);
+                Menu.menu(holerite);
                 
             }
             
             funcionario = new Funcionario(nomeFuncionario, salario, horaExtra, adicional);
             funcionario.caculaDescontosAliquota();
-            System.out.println("Holerite cadastrado");
-                        
-            return funcionario;
+            
+            int contador = 0;
+            for(int i = 0; i < this.holerites.length; i++ )
+            {
+                if(this.holerites[i] == null)
+                {
+                    contador += 1;
+                }                               
+            }
+            
+            int indice = this.holerites.length - contador;
+            if(indice < 10)
+            {  
+                System.out.println("Holerite cadastrado");
+                this.holerites[indice] = funcionario.retornaDados();
+            }
+            else
+            {
+                System.out.println("Limite de funcionários atingido, apague algum para continuar");
+            }
+            
+            
+            return this.holerites;
         }
         catch(Exception e)
         {
@@ -56,19 +84,26 @@ public class Holerite
         return buffer;
     }
     
-//    public static double calculaDescontosAliquotas(Funcionario funcionario)
-//    {
-//    
-//        double salarioTotal = funcionario.
-//     }
-//       
-//        return 0.00;
-//    }
+
     
-    
-    public static void pegaFuncionarios()
+    public void pegaFuncionarios()
     {
-        
+        int contador = 0;
+        for(String i : this.holerites)
+        {
+            if(i != null)
+            {
+                System.out.println(i);
+            }
+            else
+            {
+                contador += 1;
+            }
+        }
+        if(contador == 10)
+        {
+            System.out.println("\n!! Nenhum holerite cadastrado. !!\n");
+        }
     
     }    
     

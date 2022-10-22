@@ -2,16 +2,17 @@
 package holeritemain;
 
 import menu.Menu;
-import funcionario.Funcionario;
+import holerite.Holerite;
 
 public class HoleriteMain 
 {
 
     public static void main(String[] args) 
     {   
+        Holerite holerite = new Holerite(new String[10]);
         try
         {
-            Menu.menu();       
+            Menu.menu(holerite);       
         }
         catch(Exception e)
         {

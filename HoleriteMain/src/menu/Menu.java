@@ -6,7 +6,7 @@ import holerite.Holerite;
 public class Menu 
 {
     
-    public static void menu()
+    public static void menu(Holerite holerite)
     {
         System.out.println("---------------------------------------------");
         System.out.println("|         CALCULADORA DE HOLERITE           |");
@@ -23,7 +23,7 @@ public class Menu
         System.out.println("|___________________________________________|");
         
         int opcao = opcao();
-        avaliaOpcao(opcao);  
+        avaliaOpcao(opcao, holerite);  
     }
     
     public static int opcao()
@@ -35,17 +35,19 @@ public class Menu
         return opcao;
     }
     
-    public static void avaliaOpcao(int opcao)
+    public static void avaliaOpcao(int opcao, Holerite holerite)
     {
+        
         switch(opcao)
         {
             case 1:
-                Holerite.cadastraHolerite();
-                menu();
+                holerite.cadastraHolerite();
+                menu(holerite);
                 break;
                 
             case 2:
-                Holerite.pegaFuncionarios();
+                holerite.pegaFuncionarios();
+                menu(holerite);
                 break;
                 
             case 3:
@@ -59,7 +61,7 @@ public class Menu
                 
             default:
                 System.out.println("Operação inválida");
-                Menu.avaliaOpcao(opcao);
+                Menu.avaliaOpcao(opcao, holerite);
                 
         }
     }

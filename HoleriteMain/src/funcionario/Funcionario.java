@@ -17,7 +17,6 @@ public class Funcionario {
         this.horaExtra = horaExtra;
         this.adicional = adicional;
         this.valorTotal = salario + horaExtra + adicional;
-        
     }
     public  String pegaInfos()
     {
@@ -58,4 +57,12 @@ public class Funcionario {
         return valorTotal;
         
     }
+    
+    public String retornaDados(){
+        String dados = String.format("Nome: %s \nSalario: %f\nValor total: %f", this.nome, this.salario, this.valorTotal);
+        
+        return dados;
+        
+    }
+    
 }
