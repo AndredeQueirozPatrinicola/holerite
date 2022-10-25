@@ -6,17 +6,23 @@ public class Funcionario {
     
     public String nome;
     public double salario;
+    public double valorHora;
     public double horaExtra;
     public double adicional;
     public double valorTotal;
+    public double inss;
+    public double irrf;
 
-    public Funcionario(String nome, double salario, double horaExtra, double adicional )
+    public Funcionario(String nome, double salario, double valorHora, double horaExtra, double adicional )
     {
         this.nome = nome;
         this.salario = salario;
+        this.valorHora = valorHora;
         this.horaExtra = horaExtra;
         this.adicional = adicional;
-        this.valorTotal = salario + horaExtra + adicional;
+        this.valorTotal = salario + (horaExtra * valorHora) + adicional;
+        this.inss = 0;
+        this.irrf = 0;
     }
     public  String pegaInfos()
     {
@@ -27,40 +33,78 @@ public class Funcionario {
         return infos;
     }
     
-    public double caculaDescontosAliquota()
+    public void caculaDescontosINSS()
     {
         
-        double inss = 0;
-        double valorDescontado = 0;
-        
-        if (valorTotal < 1212.00)
+        if (this.valorTotal < 1212.00)
         {
-            inss = valorTotal * 0.075;
+            this.inss = this.valorTotal * 0.075;
         }
-        if(valorTotal > 1212.00 && valorTotal < 2427.35 )
+        if(this.valorTotal > 1212.00 && this.valorTotal < 2427.35 )
         {
-            inss = valorTotal * 0.09;
+            this.inss = this.valorTotal * 0.09;
         }
-        if(valorTotal > 2427.35 && valorTotal < 3641.03)
+        if(this.valorTotal > 2427.35 && this.valorTotal < 3641.03)
         {
-            inss = valorTotal * 0.12;
+            this.inss = this.valorTotal * 0.12;
         }
-        if(valorTotal > 3641.03)
+        if(this.valorTotal > 3641.03)
         {
-            inss = valorTotal * 0.14;
+            this.inss = this.valorTotal * 0.14;
         }
         
-        if(valorDescontado < 1924.32)
-        {
-            System.out.println("ooi");
-        }
-        return valorTotal;
         
+        this.valorTotal = this.valorTotal - this.inss;
+        
+        calculaDescontoIRRF();
+
     }
     
+    
+    public void calculaDescontoIRRF()
+    {
+        
+        if(this.valorTotal < 1924.32)
+        {
+            this.irrf = 0;
+        }
+        if(this.valorTotal > 1924.32 && this.valorTotal < 2826.98)
+        {
+            this.irrf = this.valorTotal * 0.075;
+        }
+        if(this.valorTotal > 2826.98 && this.valorTotal < 3751.05)
+        {
+            this.irrf = this.valorTotal * 0.15;
+        }
+        if(this.valorTotal > 3751.05 && this.valorTotal < 4664.68)
+        {
+            this.irrf = this.valorTotal * 0.225;
+        }
+        if(this.valorTotal > 4664.68)
+        {
+            this.irrf = this.valorTotal * 0.275;
+        }
+        
+        this.valorTotal = this.valorTotal - this.irrf;
+    }
+    
+            
     public String retornaDados(){
-        String dados = String.format("--------------------------------------------------------------\n|                        Holerite                            |\n--------------------------------------------------------------\nNome: %s\nSalario: %.2f\nHora extra:  %.2f\nAdicional: %.2f ", 
-                                     this.nome, this.salario, this.horaExtra, this.adicional);
+        String dados = String.format(""
+                + "\n-------------------------------------------------------------"
+                + "\n Nome: %s                                                    "
+                + "\n-------------------------------------------------------------"
+                + "\n GANHOS:                                                     "
+                + "\n Salario: %.2f                                               "
+                + "\n Hora(s) extra(s): %.2f                                      "
+                + "\n Adicional: %.2f                                             "
+                + "\n Valor total: %.2f                                           "
+                + "\n-------------------------------------------------------------"
+                + "\n DESCONTOS:                                                  "
+                + "\n INSS: %.2f                                                  "
+                + "\n IRRF: %.2f                                                  ", 
+                                     
+                this.nome, this.salario, this.horaExtra * this.valorHora, this.adicional, this.valorTotal, this.inss, this.irrf);
         
         return dados;
         

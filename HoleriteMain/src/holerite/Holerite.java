@@ -27,19 +27,23 @@ public class Holerite
         try
         {
             Scanner nm = new Scanner(System.in);
-            System.out.print("Insira o nome do funcionario:  ");
+            System.out.print("Insira o nome do funcionario: ");
             String nomeFuncionario = nm.nextLine();
 
             Scanner sl = new Scanner(System.in);
-            System.out.print("Insira o salário do funcionário:  ");
+            System.out.print("Insira o salário do funcionário: R$");
             double salario = sl.nextDouble();
+            
+            Scanner vh = new Scanner(System.in);
+            System.out.print("Insira o valor da hora: R$");
+            double valorHora = vh.nextDouble();
 
             Scanner hr = new Scanner(System.in);
             System.out.print("Insira o numero de horas extras: ");
             double horaExtra = hr.nextDouble();
 
             Scanner ad = new Scanner(System.in);
-            System.out.print("Insira o valor do adicional: ");
+            System.out.print("Insira o valor do adicional: R$");
             double adicional = ad.nextDouble();
             
             if(nomeFuncionario.equals("0") && salario == 0 && horaExtra == 0 && adicional == 0)
@@ -49,8 +53,8 @@ public class Holerite
                 
             }
             
-            funcionario = new Funcionario(nomeFuncionario, salario, horaExtra, adicional);
-            funcionario.caculaDescontosAliquota();
+            funcionario = new Funcionario(nomeFuncionario, salario, valorHora, horaExtra, adicional);
+            funcionario.caculaDescontosINSS();
             
             int contador = 0;
             for(int i = 0; i < this.holerites.length; i++ )
@@ -89,6 +93,10 @@ public class Holerite
     public void pegaFuncionarios()
     {
         int contador = 0;
+        System.out.println(""
+         + "--------------------------------------------------------------"
+        + "\n|                        Holerites                           |"
+        + "\n--------------------------------------------------------------");
         for(String i : this.holerites)
         {
             if(i != null)
