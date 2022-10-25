@@ -12,6 +12,7 @@ public class Funcionario {
     public double valorTotal;
     public double inss;
     public double irrf;
+    public double valeAlimentacao;
 
     public Funcionario(String nome, double salario, double valorHora, double horaExtra, double adicional )
     {
@@ -23,14 +24,7 @@ public class Funcionario {
         this.valorTotal = salario + (horaExtra * valorHora) + adicional;
         this.inss = 0;
         this.irrf = 0;
-    }
-    public  String pegaInfos()
-    {
-        String infos = String.format("--------------------------------------------------------------\n|                        Holerite                            |\n--------------------------------------------------------------\nNome: %s\nSalario: %.2f\nHora extra:  %.2f\nAdicional: %.2f ", 
-                                     this.nome, this.salario, this.horaExtra, this.adicional);
-        
-        System.out.println(infos);
-        return infos;
+        this.valeAlimentacao = 0;
     }
     
     public void caculaDescontosINSS()
@@ -88,21 +82,28 @@ public class Funcionario {
         this.valorTotal = this.valorTotal - this.irrf;
     }
     
+    public void calculaVale(String vale)
+    {
+        if(vale.equals("s"))
+        {
+            this.valeAlimentacao = 0;
+        }
+    }
+    
             
     public String retornaDados(){
         String dados = String.format(""
-                + "\n-------------------------------------------------------------"
-                + "\n Nome: %s                                                    "
-                + "\n-------------------------------------------------------------"
-                + "\n GANHOS:                                                     "
-                + "\n Salario: %.2f                                               "
-                + "\n Hora(s) extra(s): %.2f                                      "
-                + "\n Adicional: %.2f                                             "
-                + "\n Valor total: %.2f                                           "
-                + "\n-------------------------------------------------------------"
-                + "\n DESCONTOS:                                                  "
-                + "\n INSS: %.2f                                                  "
-                + "\n IRRF: %.2f                                                  ", 
+                + "\n---------------------------------------------------"
+                + "\n | Nome: %s \t \t \t \t \t |"
+                + "\n----------------------GANHOS-----------------------"
+                + "\n | Salario: %.2f \t \t \t \t |"
+                + "\n | Hora(s) extra(s): %.2f \t \t \t |"
+                + "\n | Adicional: %.2f \t \t \t \t |"
+                + "\n | Valor total: %.2f \t \t \t |"
+                + "\n--------------------DESCONTOS----------------------"
+                + "\n | INSS: %.2f \t \t \t \t |"
+                + "\n | IRRF: %.2f \t \t \t \t |"
+                + "\n---------------------------------------------------", 
                                      
                 this.nome, this.salario, this.horaExtra * this.valorHora, this.adicional, this.valorTotal, this.inss, this.irrf);
         

@@ -18,7 +18,6 @@ public class Holerite
     {
         System.out.println("\n---------------------------------------------");
         System.out.println("|     Digite as informações do holerite     |");
-        System.out.println("|  ou digite 0 em todos os campos para sair |");
         System.out.println("---------------------------------------------\n");
         
         Funcionario funcionario;
@@ -46,15 +45,18 @@ public class Holerite
             System.out.print("Insira o valor do adicional: R$");
             double adicional = ad.nextDouble();
             
-            if(nomeFuncionario.equals("0") && salario == 0 && horaExtra == 0 && adicional == 0)
-            {
-                Holerite holerite = new Holerite(new String[10]);
-                Menu.menu(holerite);
-                
-            }
+            Scanner vr = new Scanner(System.in);
+            System.out.print("Recebe vale alimentação?[s/n]: ");
+            String valeAlimentacao = vr.nextLine();
             
             funcionario = new Funcionario(nomeFuncionario, salario, valorHora, horaExtra, adicional);
             funcionario.caculaDescontosINSS();
+            
+            if(!valeAlimentacao.equals("s") || !valeAlimentacao.equals("n"))
+            {
+                System.out.println("Inserir vale alimentação corretamente");
+                cadastraHolerite();
+            }
             
             int contador = 0;
             for(int i = 0; i < this.holerites.length; i++ )
@@ -93,10 +95,7 @@ public class Holerite
     public void pegaFuncionarios()
     {
         int contador = 0;
-        System.out.println(""
-         + "--------------------------------------------------------------"
-        + "\n|                        Holerites                           |"
-        + "\n--------------------------------------------------------------");
+        
         for(String i : this.holerites)
         {
             if(i != null)
