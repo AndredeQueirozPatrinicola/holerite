@@ -52,7 +52,7 @@ public class Holerite
             funcionario = new Funcionario(nomeFuncionario, salario, valorHora, horaExtra, adicional);
             funcionario.caculaDescontosINSS();
             
-            if(!valeAlimentacao.equals("s") || !valeAlimentacao.equals("n"))
+            if(!valeAlimentacao.equals("s") && !valeAlimentacao.equals("n"))
             {
                 System.out.println("Inserir vale alimentação corretamente");
                 cadastraHolerite();
@@ -116,6 +116,8 @@ public class Holerite
     
     public static void listaTodos()
     {
+        
+        
         
     
     }
