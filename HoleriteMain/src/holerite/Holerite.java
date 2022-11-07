@@ -3,15 +3,18 @@ package holerite;
 import funcionario.Funcionario;
 import menu.Menu;
 import java.util.Scanner;
+import static menu.Menu.opcao;
 
 public class Holerite 
 {
     
     public String[] holerites;
+    public String[] nomes;
     
-    public Holerite(String[] holerites)
+    public Holerite(String[] holerites, String[] nomes)
     {
         this.holerites = holerites;
+        this.nomes = nomes;
     }
 
     public  String[] cadastraHolerite()
@@ -33,10 +36,6 @@ public class Holerite
             System.out.print("Insira o salário do funcionário: R$");
             double salario = sl.nextDouble();
             
-            Scanner vh = new Scanner(System.in);
-            System.out.print("Insira o valor da hora: R$");
-            double valorHora = vh.nextDouble();
-
             Scanner hr = new Scanner(System.in);
             System.out.print("Insira o numero de horas extras: ");
             double horaExtra = hr.nextDouble();
@@ -46,17 +45,19 @@ public class Holerite
             double adicional = ad.nextDouble();
             
             Scanner vr = new Scanner(System.in);
-            System.out.print("Recebe vale alimentação?[s/n]: ");
-            String valeAlimentacao = vr.nextLine();
+            System.out.print("Valor do vale alimentacao: R$");
+            double valeAlimentacao = vr.nextDouble();
             
-            funcionario = new Funcionario(nomeFuncionario, salario, valorHora, horaExtra, adicional);
+            Scanner vt = new Scanner(System.in);
+            System.out.print("Gasto com transporte: R$");
+            double valeTransporte = vt.nextDouble();
+            
+            Scanner des = new Scanner(System.in);
+            System.out.print("Outros descontos: R$");
+            double descontos = des.nextDouble();
+            
+            funcionario = new Funcionario(nomeFuncionario, salario, horaExtra, adicional, valeAlimentacao, valeTransporte, descontos);
             funcionario.caculaDescontosINSS();
-            
-            if(!valeAlimentacao.equals("s") && !valeAlimentacao.equals("n"))
-            {
-                System.out.println("Inserir vale alimentação corretamente");
-                cadastraHolerite();
-            }
             
             int contador = 0;
             for(int i = 0; i < this.holerites.length; i++ )
@@ -72,6 +73,7 @@ public class Holerite
             {  
                 System.out.println("Holerite cadastrado");
                 this.holerites[indice] = funcionario.retornaDados();
+                this.nomes[indice] = funcionario.retornaNome();
             }
             else
             {
@@ -114,11 +116,29 @@ public class Holerite
     
     }    
     
-    public static void listaTodos()
+    public void listaTodos()
     {
         
+        for(int i = 0; i < this.nomes.length; i++)
+        {
+            if (this.nomes[i] != null)
+            {
+                System.out.printf("%d - %s \n", i, this.nomes[i]);
+            }
+        }
+
+        System.out.println("---------------------------------------------");
+        System.out.println("|                                           |");
+        System.out.println("| Selecione um funcionário pelo indice:     |");
+        System.out.println("|                                           |");
+        System.out.println("---------------------------------------------");
         
-        
+        int opcao = opcao();
+    }
     
+    public void apagaHolerite(int opcao)
+    {
+        this.holerites[opcao] = null;
+        this.nomes[opcao] = null;
     }
 }

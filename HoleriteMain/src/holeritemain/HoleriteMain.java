@@ -9,14 +9,14 @@ public class HoleriteMain
 
     public static void main(String[] args) 
     {   
-        Holerite holerite = new Holerite(new String[10]);
+        Holerite holerite = new Holerite(new String[10], new String[10]);
         try
         {
-            Menu.menu(holerite);       
+            Menu.menuMain(holerite);       
         }
         catch(Exception e)
         {
-            System.out.println("\n!! Opção inválida, selecione uma das opções listadas !!\n");
+            System.out.println("\n!! Algo de errado com a inicialização do programa !!\n");
             main(null);
         }
     }

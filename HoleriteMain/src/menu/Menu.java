@@ -2,9 +2,24 @@ package menu;
 
 import java.util.Scanner;
 import holerite.Holerite;
+import static holeritemain.HoleriteMain.main;
 
 public class Menu 
 {
+    
+    public static void menuMain(Holerite holerite)
+    {
+        try
+        {
+            menu(holerite);       
+        }
+        catch(Exception e)
+        {
+            System.out.println("\n!! Opção inválida, selecione uma das opções listadas !!\n");
+            menuMain(holerite);
+        }
+    }
+    
     
     public static void menu(Holerite holerite)
     {
@@ -17,8 +32,8 @@ public class Menu
         System.out.println("| Escolha uma das opções para continuar:    |");
         System.out.println("|                                           |");
         System.out.println("| 1 - Cadastrar Holerite                    |");
-        System.out.println("| 2 - Selecionar funcionário                |");
-        System.out.println("| 3 - Listar todos holerites                |");
+        System.out.println("| 2 - Listar todos holerites                |");
+        System.out.println("| 3 - Selecionar funcionario                |");
         System.out.println("| 4 - Sair                                  |");
         System.out.println("|                                           |");
         System.out.println("---------------------------------------------");
@@ -43,16 +58,17 @@ public class Menu
         {
             case 1:
                 holerite.cadastraHolerite();
-                menu(holerite);
+                menuMain(holerite);
                 break;
                 
             case 2:
                 holerite.pegaFuncionarios();
-                menu(holerite);
+                menuMain(holerite);
                 break;
                 
             case 3:
-                Holerite.listaTodos();
+                holerite.listaTodos();
+                menuMain(holerite);
                 break;
             
             case 4:
@@ -66,4 +82,49 @@ public class Menu
                 
         }
     }
+    
+    public void menuListaTodos(Holerite holerite, String nomes)
+    {
+        System.out.println("---------------------------------------------");
+        System.out.println("|                                           |");
+        System.out.println("| Escolha uma das opções para continuar:    |");
+        System.out.println("|                                           |");
+        System.out.println("| 1 - Editar                                 |");
+        System.out.println("| 2 - Apagar                                |");
+        System.out.println("| 3 - Sair                                  |");
+        System.out.println("|                                           |");
+        System.out.println("---------------------------------------------");
+        
+        int opcao = opcao();
+        avaliaOpcaoMenuListaTodos(opcao, holerite);
+    }
+    
+    public void avaliaOpcaoMenuListaTodos(int opcao, Holerite holerite)
+    {
+                
+        switch(opcao)
+        {
+            case 1:
+//                holerite.cadastraHolerite();
+//                menuMain(holerite);
+                break;
+                
+            case 2:
+                holerite.apagaHolerite(opcao);
+                menuMain(holerite);
+                break;
+                
+            case 3:
+                holerite.listaTodos();
+                menuMain(holerite);
+                break;
+                
+            default:
+                System.out.println("Operação inválida");
+                avaliaOpcaoMenuListaTodos(opcao, holerite);
+                
+        }
+    }
 }
+
+    
