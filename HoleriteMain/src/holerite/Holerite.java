@@ -118,22 +118,42 @@ public class Holerite
     
     public void listaTodos()
     {
-        
+        int contador = 0;
         for(int i = 0; i < this.nomes.length; i++)
         {
             if (this.nomes[i] != null)
             {
                 System.out.printf("%d - %s \n", i, this.nomes[i]);
+                contador += 1;
             }
         }
-
-        System.out.println("---------------------------------------------");
-        System.out.println("|                                           |");
-        System.out.println("| Selecione um funcionário pelo indice:     |");
-        System.out.println("|                                           |");
-        System.out.println("---------------------------------------------");
         
-        int opcao = opcao();
+        if(contador == 0)
+        {
+            System.out.println("---------------------------------------------");
+            System.out.println("|                                           |");
+            System.out.println("|    Ainda nenhum funcionario cadastrado    |");
+            System.out.println("|                                           |");
+            System.out.println("---------------------------------------------");
+        }
+        else
+        {    
+            System.out.println("---------------------------------------------");
+            System.out.println("|                                           |");
+            System.out.println("| Selecione um funcionário pelo indice:     |");
+            System.out.println("|                                           |");
+            System.out.println("---------------------------------------------");
+
+            int opcao = opcao();
+            pegaFuncionario(opcao);
+            
+        }
+
+    }
+
+    public void pegaFuncionario(int opcao)
+    {
+            System.out.println(this.holerites[opcao]);
     }
     
     public void apagaHolerite(int opcao)

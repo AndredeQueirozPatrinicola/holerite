@@ -83,7 +83,7 @@ public class Funcionario {
             this.inss = this.valorTotal * 0.14;
         }
         
-        System.out.println(this.inss);
+        System.out.println(this.valorTotal);
         this.valorTotal = this.valorTotal - this.inss;
         
         calculaDescontoIRRF();
@@ -93,7 +93,7 @@ public class Funcionario {
     
     public void calculaDescontoIRRF()
     {
-        
+        System.out.println(this.valorTotal);
         if(this.valorTotal < 1924.32)
         {
             this.irrf = 0;

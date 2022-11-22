@@ -80,50 +80,7 @@ public class Menu
                 System.out.println("Operação inválida");
                 Menu.avaliaOpcao(opcao, holerite);
                 
-        }
-    }
-    
-    public void menuListaTodos(Holerite holerite, String nomes)
-    {
-        System.out.println("---------------------------------------------");
-        System.out.println("|                                           |");
-        System.out.println("| Escolha uma das opções para continuar:    |");
-        System.out.println("|                                           |");
-        System.out.println("| 1 - Editar                                 |");
-        System.out.println("| 2 - Apagar                                |");
-        System.out.println("| 3 - Sair                                  |");
-        System.out.println("|                                           |");
-        System.out.println("---------------------------------------------");
-        
-        int opcao = opcao();
-        avaliaOpcaoMenuListaTodos(opcao, holerite);
-    }
-    
-    public void avaliaOpcaoMenuListaTodos(int opcao, Holerite holerite)
-    {
-                
-        switch(opcao)
-        {
-            case 1:
-//                holerite.cadastraHolerite();
-//                menuMain(holerite);
-                break;
-                
-            case 2:
-                holerite.apagaHolerite(opcao);
-                menuMain(holerite);
-                break;
-                
-            case 3:
-                holerite.listaTodos();
-                menuMain(holerite);
-                break;
-                
-            default:
-                System.out.println("Operação inválida");
-                avaliaOpcaoMenuListaTodos(opcao, holerite);
-                
-        }
+        } 
     }
 }
 
